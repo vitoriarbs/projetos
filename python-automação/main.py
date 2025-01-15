@@ -29,6 +29,7 @@ tabela = pd.read_csv("produtos.csv")
 print(tabela)
 
 #Passo 4: Cadastrar o 1 produto
+#Passo 5: Repetir o passo 4 até acabar todos os produtos
 for linha in tabela.index: 
     #index para pegar as informações das linhas da tabela / colun para colunas
     pyautogui.click(x=732, y=309) #clica no primeiro campo
@@ -64,8 +65,10 @@ for linha in tabela.index:
     pyautogui.press("tab")
 
     #obs
-    obs = tabela.loc[linha, "obs"]
-    pyautogui.write(str(obs))
+    #pandas coloca valores vazios como "nan"
+    obs = str(tabela.loc[linha, "obs"])
+    if obs != "nan":
+        pyautogui.write(obs)
     pyautogui.press("tab")
 
     pyautogui.press("enter") #enviar
@@ -73,5 +76,3 @@ for linha in tabela.index:
     #numero positivo = scrool para cima
     #numero negativo = scroll para baixo
     pyautogui.scroll(10000)
-#Passo 5: Repetir o passo 4 até acabar todos os produtos
-
