@@ -2,14 +2,13 @@ import pyautogui
 import pandas as pd
 import time
 
-pyautogui.PAUSE = 4
+pyautogui.PAUSE = 3
 
 #Passo 1: Abrir o navegador
 pyautogui.press("win")
 pyautogui.write("chrome")
 pyautogui.press("enter")
-#time.sleep(10)
-#pyautogui.click(x=654, y=744)
+time.sleep(3)
 
 #Passo 2: Abrir o sistema da empresa (https://dlp.hashtagtreinamentos.com/python/intensivao/login)
 link = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
@@ -17,7 +16,7 @@ pyautogui.write(link)
 pyautogui.press("enter")
 
 #Passo 2: Fazer login
-time.sleep(5)
+time.sleep(3    )
 pyautogui.click(x=705, y=425)
 pyautogui.write("fulano@gmail.com")
 pyautogui.click(x=690, y=525)
@@ -30,49 +29,42 @@ print(tabela)
 
 #Passo 4: Cadastrar o 1 produto
 #Passo 5: Repetir o passo 4 até acabar todos os produtos
-for linha in tabela.index: 
-    #index para pegar as informações das linhas da tabela / colun para colunas
-    pyautogui.click(x=732, y=309) #clica no primeiro campo
+    
+for linha in tabela.index: #index para pegar as informações das linhas da tabela
+    print(linha)
 
-    #codigo
-    codigo = tabela.loc[linha,"codigo"] #loc = localizar
+    # clicar no campo de código
+    pyautogui.click(x=630, y=312)
+
+    # pegar da tabela o valor do campo que será preenchido
+    codigo = tabela.loc[linha, "codigo"]
+    # preencher o campo
     pyautogui.write(str(codigo))
+    # passar para o proximo campo
     pyautogui.press("tab")
-
-    #marca
-    marca = tabela.loc[linha,"marca"]
-    pyautogui.write(str(marca))
+    # preencher o campo
+    #loc de localizar
+    pyautogui.write(str(tabela.loc[linha, "marca"]))
     pyautogui.press("tab")
-
-    #tipo
-    tipo = tabela.loc[linha,"tipo"]
-    pyautogui.write(str(tipo))
+    
+    pyautogui.write(str(tabela.loc[linha, "tipo"]))
     pyautogui.press("tab")
-
-    #categoria
-    categoria = tabela.loc[linha,"categoria"]
-    pyautogui.write(str(categoria))
+    
+    pyautogui.write(str(tabela.loc[linha, "categoria"]))
     pyautogui.press("tab")
-
-    #preco_unitario
-    preco_unitario = tabela.loc[linha,"preco_unitario"]
-    pyautogui.write(str(preco_unitario))
+    
+    pyautogui.write(str(tabela.loc[linha, "preco_unitario"]))
     pyautogui.press("tab")
-
-    #custo
-    custo = tabela.loc[linha, "custo"]
-    pyautogui.write(str(custo))
+    
+    pyautogui.write(str(tabela.loc[linha, "custo"]))
     pyautogui.press("tab")
-
-    #obs
-    #pandas coloca valores vazios como "nan"
-    obs = str(tabela.loc[linha, "obs"])
-    if obs != "nan":
-        pyautogui.write(obs)
+    
+    obs = tabela.loc[linha, "obs"]
+    if not pd.isna(obs):
+        pyautogui.write(str(tabela.loc[linha, "obs"]))
     pyautogui.press("tab")
+    
+    pyautogui.press("enter") # cadastra o produto (botao enviar)
 
-    pyautogui.press("enter") #enviar
-
-    #numero positivo = scrool para cima
-    #numero negativo = scroll para baixo
-    pyautogui.scroll(10000)
+    # dar scroll de tudo pra cima
+    pyautogui.scroll(1000)
