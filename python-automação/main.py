@@ -2,7 +2,7 @@ import pyautogui
 import pandas as pd
 import time
 
-pyautogui.PAUSE = 3 #todos os comandos do pyautogui serão executados após 3seg
+pyautogui.PAUSE = 1 #todos os comandos do pyautogui serão executados após 3seg
 
 #Passo 1: Abrir o navegador
 pyautogui.press("win") #press pressiona um botão do teclado
